@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flask Learning — Learn by Building</title><meta name="description" content="Focused interactive Flask syntax and concepts course.">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="#"><span class="brand-mark">F</span><span>Flask<span class="muted">Learning</span></span></a><div class="top-actions"><span id="progressText">0% complete</span><button id="resetBtn" class="ghost">Reset</button></div></header>
+<main class="shell">
+<section class="hero"><div class="eyebrow">INTERACTIVE FLASK COURSE</div><h1>Learn the syntax.<br><em>Understand the why.</em></h1><p>One focused lesson at a time. See the code, understand what each piece does, test yourself, then build.</p><div class="hero-actions"><button class="primary" onclick="startLearning()">Start learning →</button><button class="secondary" onclick="openQuiz()">Take a quiz</button></div><div class="progress-card"><div class="progress-row"><span>Your progress</span><strong id="progressPercent">0%</strong></div><div class="bar"><i id="progressBar"></i></div><small id="progressDetail">0 of {{ lessons|length }} lessons completed</small></div></section>
+<div class="layout"><aside class="sidebar"><div class="side-title">COURSE MAP</div>{% for group in ['Foundations','Requests','Frontend','Navigation','Users','Database','Web Features','Architecture','APIs','Reliability','Security','Deployment','Next Level'] %}<div class="side-group"><div>{{ group }}</div>{% for lesson in lessons if lesson.group == group %}<button class="side-lesson" data-lesson="{{ lesson.id }}" onclick="openLesson('{{ lesson.id }}')"><span>{{ lesson.id }}</span>{{ lesson.title }}<b>✓</b></button>{% endfor %}</div>{% endfor %}</aside><section class="content"><div id="lessonView"></div><div id="quizView" class="hidden"></div></section></div>
+</main><script>window.COURSE={{ lessons|tojson }};window.QUIZZES={{ quizzes|tojson }};</script><script src="{{ url_for('static', filename='app.js') }}"></script>
+</body></html>
